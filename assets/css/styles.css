@@ -221,21 +221,24 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible {
   backdrop-filter: blur(16px) saturate(160%);
   -webkit-backdrop-filter: blur(16px) saturate(160%);
   border-top: 1px solid var(--color-border);
-  z-index: 100;
+  z-index: 9999;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity var(--duration-slow) var(--ease-emphasized), visibility 0s linear var(--duration-slow);
-  height: 100dvh; /* Ensure full viewport on mobile */
+  height: 100svh; /* iOS Safari small viewport */
+  min-height: 100dvh; /* Fallback */
   overflow-y: auto; /* Allow overlay to scroll independently of page */
   overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   will-change: opacity;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
   transform: translateY(-6px);
+  padding-top: calc(env(safe-area-inset-top, 0px) + 84px);
 }
 .overlay.open { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity var(--duration-slow) var(--ease-emphasized); transform: translateY(0); }
 .overlay a {
