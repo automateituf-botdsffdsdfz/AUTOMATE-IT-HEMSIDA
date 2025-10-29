@@ -37,6 +37,7 @@
       if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
         mobileMenu.classList.remove('open');
         document.body.classList.remove('menu-open');
+        document.documentElement.classList.remove('menu-open');
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.setAttribute('aria-label', 'Öppna meny');
         // Restore scroll
@@ -56,6 +57,7 @@
     if (window.innerWidth >= 960 && mobileMenu && mobileMenu.classList.contains('open')) {
       mobileMenu.classList.remove('open');
       document.body.classList.remove('menu-open');
+      document.documentElement.classList.remove('menu-open');
       if (menuToggle) {
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.setAttribute('aria-label', 'Öppna meny');
@@ -77,6 +79,7 @@
     overlayClose.addEventListener('click', () => {
       mobileMenu.classList.remove('open');
       document.body.classList.remove('menu-open');
+      document.documentElement.classList.remove('menu-open');
       if (menuToggle) {
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.setAttribute('aria-label', 'Öppna meny');
@@ -100,6 +103,7 @@
         mobileMenu.classList.remove('open');
         if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
         document.body.classList.remove('menu-open');
+        document.documentElement.classList.remove('menu-open');
         // Restore scroll
         const prev = parseInt(document.body.dataset.scrollY || '0', 10);
         document.body.style.position = '';

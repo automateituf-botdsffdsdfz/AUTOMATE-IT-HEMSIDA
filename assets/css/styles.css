@@ -60,6 +60,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 html { overflow-y: scroll; }
+html.menu-open, body.menu-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
@@ -234,8 +235,9 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible {
   align-items: center;
   justify-content: center;
   text-align: center;
+  transform: translateY(-6px);
 }
-.overlay.open { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity var(--duration-slow) var(--ease-emphasized); }
+.overlay.open { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity var(--duration-slow) var(--ease-emphasized); transform: translateY(0); }
 .overlay a {
   padding: 0.9rem 0;
   font-size: clamp(1.25rem, 2.5vw, 2rem);
