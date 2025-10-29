@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="sv" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Tjänster från AUTOMATE IT UF – Automationsflöden, integrationer och rådgivning.">
+    <title>Tjänster – AUTOMATE IT UF</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  </head>
+  <body>
+    <a class="visually-hidden" href="#main">Hoppa till innehåll</a>
+    <header class="site-header">
+      <div class="container nav-inner">
+        <a class="brand" href="/">AUTOMATE IT</a>
+        <nav class="nav-links" aria-label="Huvudnavigation">
+          <a href="index.html">Hem</a>
+          <a href="product.html" aria-current="page">Tjänster</a>
+          <a href="about.html">Om oss</a>
+          <a href="contact.html">Kontakt</a>
+          <a class="btn btn-primary nav-cta" href="contact.html">Få offert</a>
+        </nav>
+        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Öppna meny">Meny</button>
+      </div>
+      <div id="mobile-menu" class="container mobile-menu" role="navigation" aria-label="Mobil navigation">
+        <a href="index.html">Hem</a>
+        <a href="product.html" aria-current="page">Tjänster</a>
+        <a href="about.html">Om oss</a>
+        <a href="contact.html">Kontakt</a>
+        <a class="btn btn-primary" href="contact.html">Få offert</a>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1" class="container">
+      <section>
+        <h1>Tjänster</h1>
+        <p>Välj ett paket eller låt oss skräddarsy en lösning baserat på era behov.</p>
+      </section>
+      <section>
+        <div class="grid grid-3" style="margin-top: var(--space-xl);">
+          <article class="card">
+            <h3>Automationsflöden</h3>
+            <p>Bygg flöden som triggas av händelser, tid eller data. Vi optimerar för robusthet och spårbarhet.</p>
+          </article>
+          <article class="card">
+            <h3>Integrationer</h3>
+            <p>Koppla samman era system (t.ex. Google Workspace, Microsoft 365, CRM, e-handel) med säkra API:er.</p>
+          </article>
+          <article class="card">
+            <h3>Rådgivning & utbildning</h3>
+            <p>Upptäck potentialen, få best practice och lär er driva vidare internt.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <strong>AUTOMATE IT UF</strong>
+          <p>Premium automationslösningar för moderna verksamheter.</p>
+        </div>
+        <nav aria-label="Sitemap">
+          <ul style="list-style:none; padding:0; margin:0;" class="stack">
+            <li><a href="index.html">Hem</a></li>
+            <li><a href="product.html" aria-current="page">Tjänster</a></li>
+            <li><a href="about.html">Om oss</a></li>
+            <li><a href="contact.html">Kontakt</a></li>
+          </ul>
+        </nav>
+        <div>
+          <p class="help">© <span id="year"></span> AUTONATE IT UF</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+    <script src="assets/js/main.js" defer></script>
+  </body>
+  </html>
+
+

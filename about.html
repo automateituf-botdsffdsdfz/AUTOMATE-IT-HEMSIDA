@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="sv" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Om AUTONATE IT UF – vårt uppdrag, vårt arbetssätt och våra värderingar.">
+    <title>Om oss – AUTOMATE IT UF</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  </head>
+  <body>
+    <a class="visually-hidden" href="#main">Hoppa till innehåll</a>
+    <header class="site-header">
+      <div class="container nav-inner">
+        <a class="brand" href="/">AUTOMATE IT</a>
+        <nav class="nav-links" aria-label="Huvudnavigation">
+          <a href="index.html">Hem</a>
+          <a href="product.html">Tjänster</a>
+          <a href="about.html" aria-current="page">Om oss</a>
+          <a href="contact.html">Kontakt</a>
+          <a class="btn btn-primary nav-cta" href="contact.html">Få offert</a>
+        </nav>
+        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Öppna meny">Meny</button>
+      </div>
+      <div id="mobile-menu" class="container mobile-menu" role="navigation" aria-label="Mobil navigation">
+        <a href="index.html">Hem</a>
+        <a href="product.html">Tjänster</a>
+        <a href="about.html" aria-current="page">Om oss</a>
+        <a href="contact.html">Kontakt</a>
+        <a class="btn btn-primary" href="contact.html">Få offert</a>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1" class="container">
+      <section>
+        <h1>Om Automate IT</h1>
+        <p>Vi hjälper verksamheter att frigöra tid genom att automatisera återkommande arbetsflöden. Vår filosofi är enkel: premiumkvalitet utan onödig komplexitet.</p>
+      </section>
+      <section>
+        <h2>Vårt arbetssätt</h2>
+        <div class="grid grid-3" style="margin-top: var(--space-xl);">
+          <article class="card">
+            <h3>Upptäck</h3>
+            <p>Vi kartlägger era processer, målsätter och hittar snabbaste vägen till nytta.</p>
+          </article>
+          <article class="card">
+            <h3>Bygg</h3>
+            <p>Vi designar och implementerar robusta flöden med fokus på säkerhet och skalbarhet.</p>
+          </article>
+          <article class="card">
+            <h3>Leverera</h3>
+            <p>Vi testar, dokumenterar och ger support. Ni får en lösning som håller över tid.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <strong>AUTOMATE IT UF</strong>
+          <p>Premium automationslösningar för moderna verksamheter.</p>
+        </div>
+        <nav aria-label="Sitemap">
+          <ul style="list-style:none; padding:0; margin:0;" class="stack">
+            <li><a href="index.html">Hem</a></li>
+            <li><a href="product.html">Tjänster</a></li>
+            <li><a href="about.html" aria-current="page">Om oss</a></li>
+            <li><a href="contact.html">Kontakt</a></li>
+          </ul>
+        </nav>
+        <div>
+          <p class="help">© <span id="year"></span> AUTONATE IT UF</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+    <script src="assets/js/main.js" defer></script>
+  </body>
+  </html>
+
+

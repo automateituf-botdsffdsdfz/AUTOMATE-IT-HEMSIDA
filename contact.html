@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="sv" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Kontakta AUTOMATE IT UF – Skicka förfrågan eller boka konsultation.">
+    <title>Kontakt – AUTOMATE IT UF</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  </head>
+  <body>
+    <a class="visually-hidden" href="#main">Hoppa till innehåll</a>
+    <header class="site-header">
+      <div class="container nav-inner">
+        <a class="brand" href="/">AUTOMATE IT</a>
+        <nav class="nav-links" aria-label="Huvudnavigation">
+          <a href="index.html">Hem</a>
+          <a href="product.html">Tjänster</a>
+          <a href="about.html">Om oss</a>
+          <a href="contact.html" aria-current="page">Kontakt</a>
+          <a class="btn btn-primary nav-cta" href="#form">Få offert</a>
+        </nav>
+        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Öppna meny">Meny</button>
+      </div>
+      <div id="mobile-menu" class="container mobile-menu" role="navigation" aria-label="Mobil navigation">
+        <a href="index.html">Hem</a>
+        <a href="product.html">Tjänster</a>
+        <a href="about.html">Om oss</a>
+        <a href="contact.html" aria-current="page">Kontakt</a>
+        <a class="btn btn-primary" href="#form">Få offert</a>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1" class="container">
+      <section>
+        <h1>Kontakta oss</h1>
+        <p>Fyll i formuläret så återkommer vi inom 1–2 arbetsdagar.</p>
+      </section>
+
+      <section>
+        <form id="form" data-validate novalidate>
+          <div class="sr-live" id="form-live-region" aria-live="polite"></div>
+          <div class="grid grid-2">
+            <div class="field">
+              <label for="name">Namn</label>
+              <input id="name" name="name" data-required="true" autocomplete="name" />
+              <p id="error-name" class="error" hidden></p>
+            </div>
+            <div class="field">
+              <label for="email">E-post</label>
+              <input id="email" name="email" type="email" data-required="true" autocomplete="email" />
+              <p id="error-email" class="error" hidden></p>
+            </div>
+          </div>
+          <div class="field">
+            <label for="topic">Ämne</label>
+            <select id="topic" name="topic" data-required="true" aria-label="Ämne">
+              <option value="">Välj ämne…</option>
+              <option>Allmän fråga</option>
+              <option>Offert</option>
+              <option>Support</option>
+            </select>
+            <p id="error-topic" class="error" hidden></p>
+          </div>
+          <div class="field">
+            <label for="message">Meddelande</label>
+            <textarea id="message" name="message" rows="5" data-required="true"></textarea>
+            <p id="error-message" class="error" hidden></p>
+          </div>
+          <div class="cluster" style="margin-top: var(--space-lg);">
+            <button type="submit" class="btn btn-primary">Skicka</button>
+            <button type="reset" class="btn btn-outline">Rensa</button>
+          </div>
+          <p class="help" style="margin-top: var(--space-sm);">Vi sparar inte känslig data i klientloggar. Läs mer i vår policy.</p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <strong>AUTOMATE IT UF</strong>
+          <p>Premium automationslösningar för moderna verksamheter.</p>
+        </div>
+        <nav aria-label="Sitemap">
+          <ul style="list-style:none; padding:0; margin:0;" class="stack">
+            <li><a href="index.html">Hem</a></li>
+            <li><a href="product.html">Tjänster</a></li>
+            <li><a href="about.html">Om oss</a></li>
+            <li><a href="contact.html" aria-current="page">Kontakt</a></li>
+          </ul>
+        </nav>
+        <div>
+          <p class="help">© <span id="year"></span> AUTONATE IT UF</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+    <script src="assets/js/main.js" defer></script>
+  </body>
+  </html>
+
+
