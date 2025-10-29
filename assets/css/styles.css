@@ -142,7 +142,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible {
 /* Header / Nav */
 .site-header {
   position: sticky; top: 0; z-index: 50;
-  background: #ffffff;
+  background: #f7f8fa;
   border-bottom: 1px solid var(--color-border);
 }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 0; }
@@ -325,6 +325,31 @@ body.menu-open { overflow: hidden; }
 /* Pricing */
 .pricing { background: linear-gradient(180deg, #f9fbff 0%, #ffffff 100%); border: 1px solid var(--color-border); border-radius: var(--radius-xl); box-shadow: var(--shadow-soft); }
 .price { font-size: 2rem; font-weight: 700; }
+
+/* Illustration panel */
+.illustration-box {
+  background: #0b1220;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lift);
+  padding: var(--space-md);
+}
+.illustration-box img { display: block; width: 100%; height: auto; }
+
+/* Themed bullets for brand lists */
+.bullets-brand { list-style: none; margin: 0; padding: 0; }
+.bullets-brand li {
+  position: relative;
+  padding-left: 1.4rem;
+}
+.bullets-brand li + li { margin-top: 0.45rem; }
+.bullets-brand li::before {
+  content: "";
+  position: absolute; left: 0; top: 0.55em;
+  width: 0.5rem; height: 0.5rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+}
 
 /* Footer */
 .site-footer { border-top: 1px solid var(--color-border); padding: var(--space-2xl) 0; margin-top: var(--space-3xl); background: #fff; }
