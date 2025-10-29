@@ -226,6 +226,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible {
   pointer-events: none;
   transition: opacity var(--duration-slow) var(--ease-emphasized), visibility 0s linear var(--duration-slow);
   height: 100dvh; /* Ensure full viewport on mobile */
+  overflow-y: auto; /* Allow overlay to scroll independently of page */
   overscroll-behavior: contain;
   will-change: opacity;
   display: flex;

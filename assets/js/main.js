@@ -13,6 +13,8 @@
       menuToggle.setAttribute('aria-label', isOpen ? 'Stäng meny' : 'Öppna meny');
       if (isOpen) {
         // Keep current scroll position; overlay is fixed and covers viewport
+        // Ensure overlay starts at its own top
+        mobileMenu.scrollTop = 0;
         const firstLink = mobileMenu.querySelector('a, button');
         firstLink && firstLink.focus();
       }
