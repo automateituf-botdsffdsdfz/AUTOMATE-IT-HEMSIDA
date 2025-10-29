@@ -13,8 +13,20 @@
       document.documentElement.classList.toggle('menu-open', isOpen);
       menuToggle.setAttribute('aria-label', isOpen ? 'Stäng meny' : 'Öppna meny');
       if (isOpen) {
-        // Ensure overlay starts at its own top
-        mobileMenu.scrollTop = 0;
+        // Ensure overlay starts at its own top (iOS Safari needs rAF)
+        const resetOverlayScroll = () => {
+          try {
+            mobileMenu.scrollTop = 0;
+            mobileMenu.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+          } catch (_) {
+            mobileMenu.scrollTop = 0;
+          }
+        };
+        resetOverlayScroll();
+        requestAnimationFrame(() => {
+          resetOverlayScroll();
+          requestAnimationFrame(resetOverlayScroll);
+        });
         const firstLink = mobileMenu.querySelector('a, button');
         firstLink && firstLink.focus();
       }
