@@ -12,14 +12,7 @@
       document.body.classList.toggle('menu-open', isOpen);
       menuToggle.setAttribute('aria-label', isOpen ? 'Stäng meny' : 'Öppna meny');
       if (isOpen) {
-        // Ensure overlay is visible regardless of current scroll position
-        try {
-          window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
-        } catch (_) {
-          document.documentElement.scrollTop = 0;
-          document.body.scrollTop = 0;
-        }
-        mobileMenu.scrollTop = 0;
+        // Keep current scroll position; overlay is fixed and covers viewport
         const firstLink = mobileMenu.querySelector('a, button');
         firstLink && firstLink.focus();
       }
