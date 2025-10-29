@@ -328,7 +328,7 @@ body.menu-open { overflow: hidden; }
 
 /* Illustration panel */
 .illustration-box {
-  background: #0b1220;
+  background: #ffffff;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lift);
