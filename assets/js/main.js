@@ -22,8 +22,16 @@
       menuToggle.setAttribute('aria-label', isOpen ? 'Stäng meny' : 'Öppna meny');
       if (isOpen) {
         try { document.addEventListener('touchmove', preventScroll, { passive: false }); } catch (_) { /* no-op */ }
+        // Reset overlay scroll so links start at top regardless of previous state
+        try {
+          mobileMenu.scrollTop = 0;
+          mobileMenu.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        } catch (_) { mobileMenu.scrollTop = 0; }
         const firstLink = mobileMenu.querySelector('a, button');
-        firstLink && firstLink.focus();
+        if (firstLink) {
+          try { firstLink.scrollIntoView({ block: 'start' }); } catch (_) {}
+          firstLink.focus();
+        }
       } else {
         document.removeEventListener('touchmove', preventScroll);
       }
