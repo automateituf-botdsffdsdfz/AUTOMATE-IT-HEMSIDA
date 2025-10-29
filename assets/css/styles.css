@@ -60,7 +60,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 html { overflow-y: scroll; }
-html.menu-open, body.menu-open { overflow: hidden; }
+/* Do not force-scroll lock globally; allow page to remain scrollable */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
@@ -239,7 +239,7 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible {
   transform: translateY(-6px);
   padding-top: calc(env(safe-area-inset-top, 0px) + 84px);
 }
-.overlay.open { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity var(--duration-slow) var(--ease-emphasized); transform: translateY(0); }
+.overlay.open { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity var(--duration-slow) var(--ease-emphasized); transform: translateY(0); position: fixed; }
 .overlay a {
   padding: 0.9rem 0;
   font-size: clamp(1.25rem, 2.5vw, 2rem);
