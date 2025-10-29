@@ -6,35 +6,35 @@
   const menuToggle = qs('#menu-toggle');
   const mobileMenu = qs('#mobile-menu');
   if (menuToggle && mobileMenu) {
+    // Prevent page scroll when menu open on iOS (allow scrolling inside overlay)
+    const preventScroll = (e) => {
+      if (!mobileMenu.classList.contains('open')) return;
+      if (!mobileMenu.contains(e.target)) {
+        e.preventDefault();
+      }
+    };
     menuToggle.addEventListener('click', () => {
       const isOpen = mobileMenu.classList.toggle('open');
       menuToggle.setAttribute('aria-expanded', String(isOpen));
-      // Do NOT lock page scroll; position menu relative to current scroll
-      if (isOpen) {
-        mobileMenu.style.position = 'absolute';
-        mobileMenu.style.top = `${window.scrollY || document.documentElement.scrollTop || 0}px`;
-        mobileMenu.style.left = '0';
-        mobileMenu.style.right = '0';
-      } else {
-        mobileMenu.style.position = '';
-        mobileMenu.style.top = '';
-        mobileMenu.style.left = '';
-        mobileMenu.style.right = '';
-      }
+      // Lock page scroll via classes (iOS-safe combined with touchmove trap)
+      document.body.classList.toggle('menu-open', isOpen);
+      document.documentElement.classList.toggle('menu-open', isOpen);
       menuToggle.setAttribute('aria-label', isOpen ? 'Stäng meny' : 'Öppna meny');
       if (isOpen) {
+        try { document.addEventListener('touchmove', preventScroll, { passive: false }); } catch (_) { /* no-op */ }
         const firstLink = mobileMenu.querySelector('a, button');
         firstLink && firstLink.focus();
+      } else {
+        document.removeEventListener('touchmove', preventScroll);
       }
     });
     // Close on ESC
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
         mobileMenu.classList.remove('open');
-        mobileMenu.style.position = '';
-        mobileMenu.style.top = '';
-        mobileMenu.style.left = '';
-        mobileMenu.style.right = '';
+        document.body.classList.remove('menu-open');
+        document.documentElement.classList.remove('menu-open');
+        document.removeEventListener('touchmove', preventScroll);
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.setAttribute('aria-label', 'Öppna meny');
         menuToggle.focus();
@@ -62,10 +62,8 @@
   if (overlayClose && mobileMenu) {
     overlayClose.addEventListener('click', () => {
       mobileMenu.classList.remove('open');
-      mobileMenu.style.position = '';
-      mobileMenu.style.top = '';
-      mobileMenu.style.left = '';
-      mobileMenu.style.right = '';
+      document.body.classList.remove('menu-open');
+      document.documentElement.classList.remove('menu-open');
       if (menuToggle) {
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.setAttribute('aria-label', 'Öppna meny');
@@ -81,10 +79,8 @@
       if (target && target.matches('a[href^="#"]')) {
         mobileMenu.classList.remove('open');
         if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
-        mobileMenu.style.position = '';
-        mobileMenu.style.top = '';
-        mobileMenu.style.left = '';
-        mobileMenu.style.right = '';
+        document.body.classList.remove('menu-open');
+        document.documentElement.classList.remove('menu-open');
         if (menuToggle) menuToggle.setAttribute('aria-label', 'Öppna meny');
       }
     });
