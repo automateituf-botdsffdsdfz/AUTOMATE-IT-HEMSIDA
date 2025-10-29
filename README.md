@@ -1,4 +1,4 @@
-# AUTOMATE IT UF – Webbplats (HTML/CSS/JS)
+# Automate It UF – Webbplats (HTML/CSS/JS)
 
 En minimalistisk, premium-inspirerad webbplats byggd med fokus på tillgänglighet (WCAG 2.2 AA), prestanda och användbarhet.
 
@@ -70,4 +70,4 @@ En minimalistisk, premium-inspirerad webbplats byggd med fokus på tillgängligh
 - Figma-fil kan tas fram på begäran och mappas till tokens
 
 ## Licens
-© AUTOMATE IT UF. Inter-typsnitt (om använt) enligt SIL Open Font License.
+© Automate It UF. Inter-typsnitt (om använt) enligt SIL Open Font License.

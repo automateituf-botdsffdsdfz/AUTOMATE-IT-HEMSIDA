@@ -1,4 +1,4 @@
-# Design – AUTOMATE IT UF
+# Design – Automate It UF
 
 Den här mappen innehåller:
 - `design-tokens.json` – färger, typografi, skuggor, radier, spacing och motion
