@@ -171,7 +171,6 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible {
   .nav-links { display: flex; }
   .menu-toggle { display: none; }
   .hamburger { display: none !important; }
-  .overlay { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
 }
 
 .mobile-menu { display: none; }

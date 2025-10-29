@@ -9,24 +9,20 @@
     menuToggle.addEventListener('click', () => {
       const isOpen = mobileMenu.classList.toggle('open');
       menuToggle.setAttribute('aria-expanded', String(isOpen));
-      document.body.classList.toggle('menu-open', isOpen);
-      document.documentElement.classList.toggle('menu-open', isOpen);
+      // Do NOT lock page scroll; position menu relative to current scroll
+      if (isOpen) {
+        mobileMenu.style.position = 'absolute';
+        mobileMenu.style.top = `${window.scrollY || document.documentElement.scrollTop || 0}px`;
+        mobileMenu.style.left = '0';
+        mobileMenu.style.right = '0';
+      } else {
+        mobileMenu.style.position = '';
+        mobileMenu.style.top = '';
+        mobileMenu.style.left = '';
+        mobileMenu.style.right = '';
+      }
       menuToggle.setAttribute('aria-label', isOpen ? 'Stäng meny' : 'Öppna meny');
       if (isOpen) {
-        // Ensure overlay starts at its own top (iOS Safari needs rAF)
-        const resetOverlayScroll = () => {
-          try {
-            mobileMenu.scrollTop = 0;
-            mobileMenu.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-          } catch (_) {
-            mobileMenu.scrollTop = 0;
-          }
-        };
-        resetOverlayScroll();
-        requestAnimationFrame(() => {
-          resetOverlayScroll();
-          requestAnimationFrame(resetOverlayScroll);
-        });
         const firstLink = mobileMenu.querySelector('a, button');
         firstLink && firstLink.focus();
       }
@@ -35,8 +31,10 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
         mobileMenu.classList.remove('open');
-        document.body.classList.remove('menu-open');
-        document.documentElement.classList.remove('menu-open');
+        mobileMenu.style.position = '';
+        mobileMenu.style.top = '';
+        mobileMenu.style.left = '';
+        mobileMenu.style.right = '';
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.setAttribute('aria-label', 'Öppna meny');
         menuToggle.focus();
@@ -64,8 +62,10 @@
   if (overlayClose && mobileMenu) {
     overlayClose.addEventListener('click', () => {
       mobileMenu.classList.remove('open');
-      document.body.classList.remove('menu-open');
-      document.documentElement.classList.remove('menu-open');
+      mobileMenu.style.position = '';
+      mobileMenu.style.top = '';
+      mobileMenu.style.left = '';
+      mobileMenu.style.right = '';
       if (menuToggle) {
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.setAttribute('aria-label', 'Öppna meny');
@@ -81,8 +81,10 @@
       if (target && target.matches('a[href^="#"]')) {
         mobileMenu.classList.remove('open');
         if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
-        document.body.classList.remove('menu-open');
-        document.documentElement.classList.remove('menu-open');
+        mobileMenu.style.position = '';
+        mobileMenu.style.top = '';
+        mobileMenu.style.left = '';
+        mobileMenu.style.right = '';
         if (menuToggle) menuToggle.setAttribute('aria-label', 'Öppna meny');
       }
     });
