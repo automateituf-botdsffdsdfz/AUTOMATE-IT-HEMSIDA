@@ -12,11 +12,24 @@
       document.body.classList.toggle('menu-open', isOpen);
       menuToggle.setAttribute('aria-label', isOpen ? 'Stäng meny' : 'Öppna meny');
       if (isOpen) {
-        // Keep current scroll position; overlay is fixed and covers viewport
+        // Lock body scroll at current position, present overlay from its own top
+        const y = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        document.body.dataset.scrollY = String(y);
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${y}px`;
+        document.body.style.width = '100%';
         // Ensure overlay starts at its own top
         mobileMenu.scrollTop = 0;
         const firstLink = mobileMenu.querySelector('a, button');
         firstLink && firstLink.focus();
+      } else {
+        // Restore body scroll position on close
+        const prev = parseInt(document.body.dataset.scrollY || '0', 10);
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        delete document.body.dataset.scrollY;
+        window.scrollTo(0, prev);
       }
     });
     // Close on ESC
@@ -26,6 +39,13 @@
         document.body.classList.remove('menu-open');
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.setAttribute('aria-label', 'Öppna meny');
+        // Restore scroll
+        const prev = parseInt(document.body.dataset.scrollY || '0', 10);
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        delete document.body.dataset.scrollY;
+        window.scrollTo(0, prev);
         menuToggle.focus();
       }
     });
@@ -40,6 +60,13 @@
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.setAttribute('aria-label', 'Öppna meny');
       }
+      // Restore scroll
+      const prev = parseInt(document.body.dataset.scrollY || '0', 10);
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      delete document.body.dataset.scrollY;
+      window.scrollTo(0, prev);
     }
   };
   window.addEventListener('resize', handleResize);
@@ -53,6 +80,13 @@
       if (menuToggle) {
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.setAttribute('aria-label', 'Öppna meny');
+        // Restore scroll
+        const prev = parseInt(document.body.dataset.scrollY || '0', 10);
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        delete document.body.dataset.scrollY;
+        window.scrollTo(0, prev);
         menuToggle.focus();
       }
     });
@@ -66,6 +100,13 @@
         mobileMenu.classList.remove('open');
         if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
         document.body.classList.remove('menu-open');
+        // Restore scroll
+        const prev = parseInt(document.body.dataset.scrollY || '0', 10);
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        delete document.body.dataset.scrollY;
+        window.scrollTo(0, prev);
         if (menuToggle) menuToggle.setAttribute('aria-label', 'Öppna meny');
       }
     });
