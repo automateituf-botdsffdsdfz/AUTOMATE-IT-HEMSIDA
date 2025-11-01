@@ -30,7 +30,7 @@
     <header class="site-header" role="banner">
       <div class="container nav-inner">
         <a class="brand" href="#top" aria-label="Automate It UF startsida">
-          <img class="brand-logo" src="assets/Skärmbild 2025-09-29 153047.png" alt="Automate It UF" height="32">
+          <img class="brand-logo" src="assets/Automate It UF logga (utan bg).png" alt="Automate It UF" height="32">
           <span class="brand-name">Automate It UF</span>
         </a>
         <nav class="nav-links" aria-label="Huvudnavigation">
@@ -203,4 +203,199 @@
   </body>
 </html>
 
-
+<!-- 🧠 Chatbot-widget -->
+<div id="chatbot-container">
+  <div id="chatbot-header">Chatta med oss 💬</div>
+  <div id="chatbot-box" style="display:none;">
+  <div id="chatbot-messages"></div>
+  <div id="chatbot-input-area">
+  <input id="chatbot-input" type="text" placeholder="Skriv ett meddelande..." />
+  <button id="chatbot-send">➤</button>
+  </div>
+  </div>
+  </div>
+   
+  <style>
+  
+    #chatbot-container {
+  
+      position: fixed;
+  
+      bottom: 20px;
+  
+      right: 20px;
+  
+      font-family: Arial, sans-serif;
+  
+      z-index: 1000;
+  
+    }
+  
+    #chatbot-header {
+  
+      background-color: #0066cc;
+  
+      color: white;
+  
+      padding: 10px;
+  
+      border-radius: 10px 10px 0 0;
+  
+      cursor: pointer;
+  
+      width: 250px;
+  
+      text-align: center;
+  
+    }
+  
+    #chatbot-box {
+  
+      width: 250px;
+  
+      height: 350px;
+  
+      background: white;
+  
+      border: 1px solid #ccc;
+  
+      border-top: none;
+  
+      display: flex;
+  
+      flex-direction: column;
+  
+      justify-content: space-between;
+  
+      border-radius: 0 0 10px 10px;
+  
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  
+    }
+  
+    #chatbot-messages {
+  
+      flex-grow: 1;
+  
+      overflow-y: auto;
+  
+      padding: 10px;
+  
+      font-size: 14px;
+  
+    }
+  
+    #chatbot-input-area {
+  
+      display: flex;
+  
+      border-top: 1px solid #eee;
+  
+    }
+  
+    #chatbot-input {
+  
+      flex-grow: 1;
+  
+      padding: 8px;
+  
+      border: none;
+  
+      outline: none;
+  
+    }
+  
+    #chatbot-send {
+  
+      background: #0066cc;
+  
+      color: white;
+  
+      border: none;
+  
+      padding: 0 10px;
+  
+      cursor: pointer;
+  
+    }
+  
+    .chatbot-user { text-align: right; color: #0066cc; margin: 5px 0; }
+  
+    .chatbot-bot { text-align: left; color: #333; margin: 5px 0; }
+  </style>
+   
+  <script>
+  
+  const webhookUrl = "http://localhost:3000/chat"; // proxy-servern
+   
+  // öppna/stäng rutan
+  
+  document.getElementById("chatbot-header").addEventListener("click", () => {
+  
+    const box = document.getElementById("chatbot-box");
+  
+    box.style.display = box.style.display === "none" ? "flex" : "none";
+  
+  });
+   
+  // skicka meddelande
+  
+  document.getElementById("chatbot-send").addEventListener("click", sendMessage);
+  
+  document.getElementById("chatbot-input").addEventListener("keydown", (e) => {
+  
+    if (e.key === "Enter") sendMessage();
+  
+  });
+   
+  async function sendMessage() {
+  
+    const input = document.getElementById("chatbot-input");
+  
+    const text = input.value.trim();
+  
+    if (!text) return;
+   
+    const messagesDiv = document.getElementById("chatbot-messages");
+  
+    messagesDiv.innerHTML += `<div class="chatbot-user"><b>Du:</b> ${escapeHtml(text)}</div>`;
+  
+    input.value = "";
+  
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+   
+    try {
+  
+      const resp = await fetch(webhookUrl, {
+  
+        method: "POST",
+  
+        headers: { "Content-Type": "application/json" },
+  
+        body: JSON.stringify({ message: text })
+  
+      });
+  
+      const data = await resp.json();
+  
+      const reply = data.content || "(Inget svar)";
+  
+      messagesDiv.innerHTML += `<div class="chatbot-bot"><b>Bot:</b> ${escapeHtml(reply)}</div>`;
+  
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  
+    } catch (err) {
+  
+      messagesDiv.innerHTML += `<div class="chatbot-bot"><b>Fel:</b> Kunde inte nå servern.</div>`;
+  
+    }
+  
+  }
+   
+  function escapeHtml(s) {
+  
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+  
+  }
+  </script>
+   
