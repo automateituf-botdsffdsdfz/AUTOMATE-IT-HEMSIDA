@@ -30,7 +30,7 @@
     <header class="site-header" role="banner">
       <div class="container nav-inner">
         <a class="brand" href="#top" aria-label="Automate It UF startsida">
-          <img class="brand-logo" src="assets/Automate It UF logga (utan bg).png" alt="Automate It UF" height="32">
+          <img class="brand-logo" src="assets/Skärmbild 2025-09-29 153047.png" alt="Automate It UF" height="32">
           <span class="brand-name">Automate It UF</span>
         </a>
         <nav class="nav-links" aria-label="Huvudnavigation">
@@ -182,7 +182,7 @@
           <h4 class="footer-title">Kontakt</h4>
           <ul class="footer-list">
             <li>Telefon: 073 268 5242</li>
-            <li>Email: <a href="automateituf@gmail.com">automateituf@gmail.com</a></li>
+            <li>Email: <a href="mailto:automateituf@gmail.com">automateituf@gmail.com</a></li>
             <li>Ljungby, Sverige</li>
           </ul>
         </section>
@@ -380,6 +380,21 @@
       margin: 0.5rem 0;
     }
     
+    .chatbot-loading {
+      display: inline-block;
+    }
+    
+    .chatbot-loading::after {
+      content: "...";
+      animation: dots 1.5s steps(4, end) infinite;
+    }
+    
+    @keyframes dots {
+      0%, 20% { content: "."; }
+      40% { content: ".."; }
+      60%, 100% { content: "..."; }
+    }
+    
     @media (max-width: 768px) {
       #chatbot-container {
         bottom: 20px;
@@ -428,47 +443,65 @@
   });
    
   async function sendMessage() {
-  
     const input = document.getElementById("chatbot-input");
-  
     const text = input.value.trim();
-  
+    
     if (!text) return;
    
     const messagesDiv = document.getElementById("chatbot-messages");
-  
+    const sendBtn = document.getElementById("chatbot-send");
+    
+    // Visa användarens meddelande
     messagesDiv.innerHTML += `<div class="chatbot-user"><b>Du:</b> ${escapeHtml(text)}</div>`;
-  
     input.value = "";
-  
+    input.disabled = true;
+    sendBtn.disabled = true;
+    sendBtn.textContent = "…";
+    
+    // Visar loading
+    const loadingId = 'loading-' + Date.now();
+    messagesDiv.innerHTML += `<div id="${loadingId}" class="chatbot-bot"><b>Bot:</b> <span class="chatbot-loading">Tänker...</span></div>`;
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
    
     try {
-  
       const resp = await fetch(webhookUrl, {
-  
         method: "POST",
-  
         headers: { "Content-Type": "application/json" },
-  
         body: JSON.stringify({ message: text })
-  
       });
-  
+      
+      if (!resp.ok) {
+        throw new Error(`Server svarade med ${resp.status}: ${resp.statusText}`);
+      }
+      
       const data = await resp.json();
-  
-      const reply = data.content || "(Inget svar)";
-  
+      
+      // Ta bort loading
+      const loadingEl = document.getElementById(loadingId);
+      if (loadingEl) loadingEl.remove();
+      
+      // Visa svar
+      const reply = data.content || data.message || data.response || "(Inget svar)";
       messagesDiv.innerHTML += `<div class="chatbot-bot"><b>Bot:</b> ${escapeHtml(reply)}</div>`;
-  
       messagesDiv.scrollTop = messagesDiv.scrollHeight;
-  
+      
     } catch (err) {
-  
-      messagesDiv.innerHTML += `<div class="chatbot-bot"><b>Fel:</b> Kunde inte nå servern.</div>`;
-  
+      // Ta bort loading
+      const loadingEl = document.getElementById(loadingId);
+      if (loadingEl) loadingEl.remove();
+      
+      // Visa detaljerat fel
+      const errorMsg = err.message || "Kunde inte nå servern";
+      messagesDiv.innerHTML += `<div class="chatbot-bot" style="color: var(--color-danger);"><b>Fel:</b> ${escapeHtml(errorMsg)}<br><small>Kontrollera att servern körs på ${webhookUrl}</small></div>`;
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      
+      console.error("Chatbot error:", err);
+    } finally {
+      input.disabled = false;
+      sendBtn.disabled = false;
+      sendBtn.textContent = "➤";
+      input.focus();
     }
-  
   }
    
   function escapeHtml(s) {
