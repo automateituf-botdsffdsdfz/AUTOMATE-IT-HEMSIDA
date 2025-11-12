@@ -47,6 +47,8 @@
   --space-xl: 2rem;
   --space-2xl: 3rem;
   --space-3xl: 4.5rem;
+  --space-4xl: 6rem;
+  --space-5xl: 8rem;
 
   /* Motion */
   --duration-fast: 120ms;
@@ -92,6 +94,14 @@ img { display: block; }
 @media (min-width: 768px) {
   .grid-3 { grid-template-columns: repeat(3, 1fr); }
   .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-2.swap {
+    grid-template-columns: repeat(2, 1fr);
+    direction: rtl;
+  }
+  .grid-2.swap > * {
+    direction: ltr;
+  }
+  .grid-2.swap { gap: var(--space-3xl); }
 }
 
 /* Typography */
@@ -351,6 +361,22 @@ body.menu-open { overflow: hidden; }
   background: var(--color-primary);
 }
 
+.benefits-section .about-highlight { margin-top: calc(var(--space-5xl) + var(--space-xl)); }
+.about-highlight p {
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: var(--color-text);
+}
+.about-highlight p + p { margin-top: var(--space-md); }
+.about-highlight p strong { color: var(--color-text); }
+.about-highlight .team-portrait img {
+  max-width: 78%;
+  margin-inline: auto;
+}
+@media (max-width: 767px) {
+  .about-highlight .team-portrait img { max-width: 65%; }
+}
+.benefits-section { padding-bottom: var(--space-3xl); margin-bottom: var(--space-xl); }
 /* Footer */
 .site-footer { border-top: 1px solid var(--color-border); padding: var(--space-2xl) 0; margin-top: var(--space-3xl); background: #fff; }
 .footer-grid { display: flex; flex-direction: column; gap: var(--space-lg); align-items: flex-start; }
@@ -414,6 +440,7 @@ input:hover, textarea:hover, select:hover { border-color: #c5cad4; }
 
 /* Sections spacing */
 section { padding: var(--space-2xl) 0; }
+.about-section { padding-top: var(--space-2xl); }
 .section-accent {
   background:
     linear-gradient(180deg, rgba(10,132,255,0.06), rgba(11,181,167,0.04));
@@ -429,5 +456,6 @@ section { padding: var(--space-2xl) 0; }
 
 /* Shadows on hover for cards/buttons for subtle lift */
 .elevate:hover { box-shadow: var(--shadow-lift); }
+.team-portrait.elevate:hover { box-shadow: none; }
 
 
